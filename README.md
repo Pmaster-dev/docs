@@ -1,4 +1,39 @@
-# OpenAPI Definition Starter
+# 360 Magicians — Docs
+
+OpenAPI definition and aggregated documentation for the [360 Magicians](https://github.com/360magicians)
+Deaf-First AI ecosystem.
+
+## Project Docs
+
+See the [`docs/`](./docs/README.md) directory for full project documentation:
+
+- [About 360Magicians](./docs/about.md)
+- [Infrastructure / Ecosystem Architecture](./docs/infrastructure.md)
+- [DeafAuth](./docs/projects/deafauth.md)
+- [PinkSync](./docs/projects/pinksync.md)
+- [FibonRose](./docs/projects/fibonrose.md)
+- [Municipal DAO](./docs/projects/municipal-dao.md)
+- [Railway Next.js Template](./docs/projects/railway-template.md)
+
+## OpenAPI Definition
+
+The `openapi/` directory contains the OpenAPI 3.1 definition for the 360 Magicians API.
+
+### Install
+
+1. Install [Node JS](https://nodejs.org/).
+2. Clone this repo and run `npm install` in the repo root.
+
+### Usage
+
+```bash
+# Start reference docs preview
+npm start
+
+# Validate the definition
+npm test
+```
+
 
 ## How to use this starter
 

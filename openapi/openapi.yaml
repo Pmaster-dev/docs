@@ -1,122 +1,280 @@
 openapi: 3.1.0
 info:
   version: 1.0.0
-  title: Example API
-  termsOfService: https://example.com/terms/
+  title: 360 Magicians API
+  termsOfService: https://360magicians.com/terms/
   contact:
-    name: Contact our support
-    email: contact@example.com
-    url: http://example.com/contact
+    name: 360 Magicians Support
+    url: https://360magicians.com/contact
   license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    name: MIT
+    url: https://opensource.org/licenses/MIT
   x-logo:
     url: 'https://redocly.github.io/openapi-template/logo.png'
-    altText: OpenAPI example logo
+    altText: 360 Magicians logo
   description: >
-    This is an **example** API to demonstrate features of the OpenAPI
-    specification.
+    # 360 Magicians API
 
-    # Introduction
+    **Deaf Aware. Rooted Deaf First. Globally Future-Proof AIs.**
 
-    This API definition is intended to to be a good starting point for
-    describing your API in [OpenAPI/Swagger
-    format](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.2.md).
 
-    It also demonstrates features of the
-    [create-openapi-repo](https://github.com/Redocly/create-openapi-repo) tool
-    and the [Redoc](https://github.com/Redocly/Redoc) documentation engine. Beyond
-    the standard OpenAPI syntax, we use a few 
-    [vendor extensions](https://github.com/Redocly/Redoc/blob/main/docs/redoc-vendor-extensions.md).
+    The 360 Magicians API powers the **IDEA → BUILD → GROW → MANAGED** lifecycle for Deaf-first
+    AI projects. All endpoints are authenticated via **DeafAUTH** bearer tokens.
 
-    # OpenAPI Specification
 
-    The goal of The OpenAPI Specification is to define a standard, language-agnostic interface to REST APIs which
-    allows both humans and computers to discover and understand the capabilities
-    of the service without access to source
-    code, documentation, or through network traffic inspection. When properly
-    defined via OpenAPI, a consumer can 
-    understand and interact with the remote service with a minimal amount of
-    implementation logic. Similar to what
-    interfaces have done for lower-level programming, OpenAPI removes the
-    guesswork in calling the service.
+    ## Authentication
+
+    Obtain a token from [DeafAUTH](https://deafauth.mbtq.dev/docs) and pass it as a ******
+
+    ```
+    Authorization: ******
+    ```
+
+
+    ## Lifecycle Stages
+
+    | Stage   | Description |
+    |---------|-------------|
+    | **IDEA** | Generate, validate, and research ideas |
+    | **BUILD** | Create repos, wireframes, and deploy MVPs |
+    | **GROW** | Analytics, marketing campaigns, partner onboarding |
+    | **MANAGED** | Compliance, finance, and continuous monitoring |
+
+
+    ## Related Docs
+
+    - [About 360Magicians](../docs/about.md)
+    - [Infrastructure / Ecosystem Architecture](../docs/infrastructure.md)
+    - [DeafAuth](../docs/projects/deafauth.md)
+    - [PinkSync](../docs/projects/pinksync.md)
+    - [Municipal DAO](../docs/projects/municipal-dao.md)
 externalDocs:
-  description: "Find out how to create a GitHub repo for your OpenAPI definition."
-  url: 'https://github.com/Redocly/create-openapi-repo'
+  description: "360 Magicians ecosystem documentation"
+  url: 'https://github.com/360magicians'
 tags:
-  - name: Echo
-    description: "Example echo operations."
-  - name: User
-    description: "Example actions on user accounts."
-  - name: Admin
-    description: "Example operations reserved for administrators."
-  - name: Info
-    description: "Example operations for retrieving information."
-  - name: Tag
-    description: "This is a tag description."
+  - name: Auth
+    description: "DeafAUTH identity and token operations."
+  - name: Idea
+    description: "IDEA stage — generate, validate, and research ideas."
+  - name: Build
+    description: "BUILD stage — repo creation, wireframes, and MVP deployment."
+  - name: Grow
+    description: "GROW stage — analytics, marketing, and partner onboarding."
+  - name: Managed
+    description: "MANAGED stage — compliance, finance, and monitoring."
+  - name: Jobs
+    description: "Job listing and status across all lifecycle stages."
 x-tagGroups:
-  - name: General
+  - name: Identity
     tags:
-      - User
-      - Info
-      - Echo
-  - name: Administration
+      - Auth
+  - name: Lifecycle
     tags:
-      - Admin
+      - Jobs
+      - Idea
+      - Build
+      - Grow
+      - Managed
 servers:
-  - url: https://{tenant}/api/v1
-    variables:
-      tenant:
-        default: www
-        description: Your tenant id
-  - url: https://example.com/api/v1
+  - url: https://api.360magicians.com
+    description: Production API
 paths:
-  '/users/{username}':
-    $ref: 'paths/users_{username}.yaml'
-  '/user':
-    $ref: 'paths/user.yaml'
-  '/user/list':
-    $ref: 'paths/user-status.yaml'
-  /pathItem:
-    $ref: paths/pathItem.yaml
-  /pathItemWithExamples:
-    $ref: paths/pathItemWithExamples.yaml
-  '/echo':
-    $ref: 'paths/echo.yaml'
-components:
-  securitySchemes:
-    main_auth:
-      description: "Example description text of the OAuth2 scheme."
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: http://example.com/api/oauth/dialog
-          scopes:
-            'read:users': read user info
-            'write:users': modify or remove users
-    api_key:
-      description: "Example description text of the API key scheme."
-      type: apiKey
-      in: header
-      name: api_key
-    basic_auth:
-      type: http
-      scheme: basic
-webhooks:
-  userInfo:
-    post:
-      summary: New user webhook
-      description: "Information about a new user in the system."
-      operationId: userInfo
+  '/jobs/list':
+    get:
       tags:
-        - Info
+        - Jobs
+      summary: List all jobs
+      operationId: listJobs
+      description: Returns all jobs across the IDEA, BUILD, GROW, and MANAGED lifecycle stages.
+      security:
+        - deafauth: []
+      responses:
+        '200':
+          description: A list of lifecycle jobs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'components/schemas/Job.yaml'
+        '401':
+          description: Unauthorized — invalid or missing DeafAUTH token.
+  '/idea':
+    post:
+      tags:
+        - Idea
+      summary: Generate an idea
+      operationId: generateIdea
+      description: |
+        Submit a prompt to IdeaMagician to generate a new Deaf-first project idea.
+        Returns an `idea.json` payload.
+      security:
+        - deafauth: []
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              $ref: 'components/schemas/User.yaml'
+              $ref: 'components/schemas/IdeaRequest.yaml'
       responses:
         '200':
-          description: "Successfully retrieved information about a new user."
+          description: Idea generated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: 'components/schemas/Idea.yaml'
+        '401':
+          description: Unauthorized.
+  '/idea/validate':
+    post:
+      tags:
+        - Idea
+      summary: Validate an idea
+      operationId: validateIdea
+      description: |
+        Submit an `idea.json` to ValidatorMagician for compliance and feasibility validation.
+        Returns a `validation_report.json`.
       security:
-        - api_key: []
+        - deafauth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'components/schemas/Idea.yaml'
+      responses:
+        '200':
+          description: Validation report.
+          content:
+            application/json:
+              schema:
+                $ref: 'components/schemas/ValidationReport.yaml'
+        '401':
+          description: Unauthorized.
+  '/idea/research':
+    post:
+      tags:
+        - Idea
+      summary: Run market research
+      operationId: researchIdea
+      description: |
+        Submit a topic and target audience to ResearchMagician.
+        Returns a `market_research_report.md`.
+      security:
+        - deafauth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'components/schemas/ResearchRequest.yaml'
+      responses:
+        '200':
+          description: Market research report (Markdown).
+          content:
+            text/markdown:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized.
+  '/build/repo':
+    post:
+      tags:
+        - Build
+      summary: Create project repository
+      operationId: createRepo
+      description: |
+        Instruct DeveloperMagician to create a new GitHub repository for a project.
+      security:
+        - deafauth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'components/schemas/BuildRepoRequest.yaml'
+      responses:
+        '201':
+          description: Repository created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  repository_url:
+                    type: string
+                    format: uri
+        '401':
+          description: Unauthorized.
+  '/grow/campaign':
+    post:
+      tags:
+        - Grow
+      summary: Run marketing campaign
+      operationId: runCampaign
+      description: |
+        Submit a campaign brief to GrowthMagician to execute a marketing campaign.
+      security:
+        - deafauth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'components/schemas/CampaignRequest.yaml'
+      responses:
+        '200':
+          description: Campaign report.
+          content:
+            text/markdown:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized.
+  '/managed/compliance':
+    post:
+      tags:
+        - Managed
+      summary: Generate compliance report
+      operationId: generateComplianceReport
+      description: |
+        Instruct ComplianceMagician to generate a compliance report for a given period.
+      security:
+        - deafauth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [reporting_period]
+              properties:
+                reporting_period:
+                  type: string
+                  description: ISO 8601 date range, e.g. "2024-Q1"
+                  example: "2024-Q1"
+      responses:
+        '200':
+          description: Compliance report (PDF URL).
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  report_url:
+                    type: string
+                    format: uri
+        '401':
+          description: Unauthorized.
+components:
+  securitySchemes:
+    deafauth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: "DeafAUTH bearer token. Obtain from https://deafauth.mbtq.dev/docs"
+  schemas:
+    Job:
+      $ref: 'components/schemas/Job.yaml'
+    Idea:
+      $ref: 'components/schemas/Idea.yaml'
