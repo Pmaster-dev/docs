@@ -7,8 +7,16 @@ Deaf-First AI ecosystem.
 
 See the [`docs/`](./docs/README.md) directory for full project documentation:
 
+### Ecosystem Guides
 - [About 360Magicians](./docs/about.md)
 - [Infrastructure / Ecosystem Architecture](./docs/infrastructure.md)
+- [Git Workflow & GitHub Integration](./docs/git-workflow.md)
+- [Helm Deployment (dev → prod)](./docs/helm.md)
+- [Environments & Bootstrap](./docs/environments.md)
+- [AI Providers, Vendors & Resources](./docs/providers.md)
+- [Package Managers & Runtimes](./docs/package-managers.md)
+
+### Project Docs
 - [DeafAuth](./docs/projects/deafauth.md)
 - [PinkSync](./docs/projects/pinksync.md)
 - [FibonRose](./docs/projects/fibonrose.md)

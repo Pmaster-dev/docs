@@ -7,15 +7,27 @@ Deaf-First AI ecosystem and all associated repositories across the MBTQ universe
 
 ## Contents
 
+### Ecosystem Guides
+
 | File | Description |
 |------|-------------|
 | [about.md](./about.md) | Organization overview, mission, and project list |
 | [infrastructure.md](./infrastructure.md) | MBTQ ecosystem architecture (GCP / Kubernetes) |
+| [git-workflow.md](./git-workflow.md) | Branch strategy, agent git flow, GitHub Graph API, CI/CD events |
+| [helm.md](./helm.md) | Helm charts, deployment targets, env overrides (dev → prod) |
+| [environments.md](./environments.md) | Dev → staging → prod separation, bootstrap steps, env vars |
+| [providers.md](./providers.md) | AI providers, platform vendors, open-source vs proprietary vs custom |
+| [package-managers.md](./package-managers.md) | pnpm / npm / Deno / Fresh / HTML — which project uses what |
+
+### Project Docs
+
+| File | Description |
+|------|-------------|
 | [projects/deafauth.md](./projects/deafauth.md) | DeafAuth — identity & access layer + Magician Jobs API |
 | [projects/pinksync.md](./projects/pinksync.md) | PinkSync — accessibility AI middleware + API broker |
-| [projects/fibonrose.md](./projects/fibonrose.md) | FibonRose — Next.js UI application |
+| [projects/fibonrose.md](./projects/fibonrose.md) | FibonRose — Next.js UI application (pnpm, shadcn/ui) |
 | [projects/municipal-dao.md](./projects/municipal-dao.md) | Municipal DAO — real-time WebSocket governance platform |
-| [projects/railway-template.md](./projects/railway-template.md) | Railway Next.js template — production-ready starter |
+| [projects/railway-template.md](./projects/railway-template.md) | Railway Next.js template — production-ready starter (npm) |
 | [projects/mbtq-dev.md](./projects/mbtq-dev.md) | MBTQ.dev — AI-powered full-stack development platform |
 | [projects/mbtquniverse.md](./projects/mbtquniverse.md) | MBTQUniverse — DAO governance, tokenization, staking |
 
