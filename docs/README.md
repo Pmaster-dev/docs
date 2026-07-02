@@ -17,6 +17,8 @@ Deaf-First AI ecosystem and all associated repositories across the MBTQ universe
 | [helm.md](./helm.md) | Helm charts, deployment targets, env overrides (dev → prod) |
 | [environments.md](./environments.md) | Dev → staging → prod separation, bootstrap steps, env vars |
 | [providers.md](./providers.md) | AI providers, platform vendors, open-source vs proprietary vs custom |
+| [ai-model-manifest.md](./ai-model-manifest.md) | Canonical AI model registry — HF IDs, capabilities matrix, SDK bindings, deployment paths |
+| [ai-inference.md](./ai-inference.md) | Inference servers (vLLM/Ollama/TGI), routing, fallback chains, latency tiers |
 | [package-managers.md](./package-managers.md) | pnpm / npm / Deno / Fresh / HTML — which project uses what |
 | [triggers-webhooks.md](./triggers-webhooks.md) | Full webhook catalog, GitHub App setup, HMAC verification, prompt triggers |
 | [pipeline-handoffs.md](./pipeline-handoffs.md) | Every agent handoff with trigger, input/output contracts, and commands |

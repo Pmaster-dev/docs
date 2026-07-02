@@ -273,6 +273,28 @@ zip -r extension.zip . -x "*.DS_Store"
 
 ---
 
+## AI SDKs & Inference Clients
+
+| Package | Classification | Runtime | Projects |
+|---------|---------------|---------|---------|
+| **`ai` (Vercel AI SDK)** | Open Source (Apache 2.0) | Node.js / Edge | Next.js projects, streaming chat routes |
+| **`@ai-sdk/openai`** | Open Source (Apache 2.0) | Node.js / Edge | GPT-4, GPT-4o (AI SDK provider) |
+| **`@ai-sdk/anthropic`** | Open Source (Apache 2.0) | Node.js / Edge | Claude (AI SDK provider) |
+| **`@ai-sdk/google`** | Open Source (Apache 2.0) | Node.js / Edge | Gemini (AI SDK provider) |
+| **`@google/generative-ai`** | Open Source (Apache 2.0) | Node.js / Deno | Gemini direct SDK |
+| **`openai`** | Open Source (Apache 2.0) | Node.js | OpenAI + vLLM-compatible endpoints |
+| **`@anthropic-ai/sdk`** | Open Source (MIT) | Node.js | Claude SDK — BUILD stage agents |
+| **`@huggingface/inference`** | Open Source (Apache 2.0) | Node.js / Deno | HF Hub models (Llama 3, Mistral, CLIP, Whisper) |
+| **`groq-sdk`** | Open Source (Apache 2.0) | Node.js | Groq LPU fast inference |
+| **`@fal-ai/client`** | Open Source (MIT) | Node.js / Deno | Image/video generation (SDXL, FLUX.1) |
+| **`langchain`** | Open Source (MIT) | Node.js | Orchestration, RAG chains |
+| **`@orpc/server`** | Open Source (MIT) | Node.js / Deno | Type-safe RPC server wrapping all AI SDKs |
+| **`@orpc/client`** | Open Source (MIT) | Node.js / Browser | Type-safe RPC client |
+
+See [AI Model Manifest](./ai-model-manifest.md) for per-model SDK assignments, and [AI Inference Architecture](./ai-inference.md) for routing and fallback chains.
+
+---
+
 ## Consistency Rules
 
 To keep the ecosystem consistent:

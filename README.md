@@ -14,6 +14,8 @@ See the [`docs/`](./docs/README.md) directory for full project documentation:
 - [Helm Deployment (dev → prod)](./docs/helm.md)
 - [Environments & Bootstrap](./docs/environments.md)
 - [AI Providers, Vendors & Resources](./docs/providers.md)
+- [AI Model Manifest](./docs/ai-model-manifest.md)
+- [AI Inference Architecture](./docs/ai-inference.md)
 - [Package Managers & Runtimes](./docs/package-managers.md)
 - [Triggers, Webhooks & Prompts](./docs/triggers-webhooks.md)
 - [Pipeline Handoffs](./docs/pipeline-handoffs.md)

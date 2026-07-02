@@ -15,6 +15,7 @@
 | **Grok** | Grok | Proprietary | Ecosystem partner |
 | **Groq** | Mixtral, Llama 3 | Proprietary (inference) | Fast inference layer |
 | **Fal** | Image / video models | Proprietary | Content generation, Deaf media |
+| **HuggingFace** | Llama 3, Mistral, Whisper, CLIP, SDXL, embeddings | Open Source (HF Hub) | PinkSync, DeafAuth, local dev, fallback inference |
 
 ### Provider Selection by Stage
 
