@@ -35,7 +35,7 @@ properties:
     type: string
     format: uri
     description: "Endpoint where the platform pushes events to this vendor."
-    example: "https://vendor-endpoint.example.com/webhooks/magicians"
+    example: "https://external-vendor.stripe.com/webhooks/magicians"
   createdAt:
     type: string
     format: date-time
