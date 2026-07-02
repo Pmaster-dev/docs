@@ -1,0 +1,18 @@
+type: object
+description: Request body for creating a project repository.
+required:
+  - project_name
+  - project_description
+properties:
+  project_name:
+    type: string
+    description: Name of the project / repository.
+    example: deaf-gov-platform
+  project_description:
+    type: string
+    description: Short description of the project.
+    example: "Municipal governance platform for Deaf communities"
+  tech_stack:
+    type: string
+    description: Preferred technology stack.
+    example: "Next.js, TypeScript, Supabase"

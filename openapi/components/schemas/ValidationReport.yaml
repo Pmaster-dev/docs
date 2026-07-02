@@ -1,0 +1,36 @@
+type: object
+description: Validation report produced by ValidatorMagician.
+required:
+  - idea_id
+  - is_valid
+properties:
+  idea_id:
+    type: string
+    description: ID of the validated idea.
+    example: idea-abc123
+  is_valid:
+    type: boolean
+    description: Whether the idea passed validation.
+  compliance_score:
+    type: number
+    format: float
+    minimum: 0
+    maximum: 100
+    description: Compliance score out of 100.
+    example: 87.5
+  feasibility_score:
+    type: number
+    format: float
+    minimum: 0
+    maximum: 100
+    description: Feasibility score out of 100.
+    example: 92.0
+  issues:
+    type: array
+    description: List of validation issues found.
+    items:
+      type: string
+    example: []
+  notes:
+    type: string
+    description: Additional notes from ValidatorMagician.
