@@ -1,0 +1,43 @@
+type: object
+required:
+  - resource
+  - limit
+  - windowSeconds
+properties:
+  resource:
+    type: string
+    description: "Resource identifier (path prefix or service name) this policy applies to."
+    example: "/api/v1/users"
+  limit:
+    type: integer
+    minimum: 1
+    description: "Maximum number of requests allowed per window."
+    example: 1000
+  windowSeconds:
+    type: integer
+    minimum: 1
+    description: "Rolling window duration in seconds."
+    example: 3600
+  burstLimit:
+    type: integer
+    description: "Optional instantaneous burst allowance above the rolling limit."
+    example: 50
+  scope:
+    type: string
+    enum:
+      - global
+      - per_user
+      - per_service
+      - per_ip
+    description: "Whether the limit is shared globally or applied per-entity."
+    default: per_user
+  currentCount:
+    type: integer
+    readOnly: true
+    description: "Requests consumed in the current window (read-only)."
+  resetsAt:
+    type: string
+    format: date-time
+    readOnly: true
+    description: "When the current window resets (read-only)."
+    example: "2024-01-15T10:00:00Z"

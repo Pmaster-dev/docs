@@ -1,75 +1,100 @@
 openapi: 3.1.0
 info:
   version: 1.0.0
-  title: Example API
-  termsOfService: https://example.com/terms/
+  title: Magicians VR4Deaf Platform API
+  termsOfService: https://magicians.vr4deaf.org/terms/
   contact:
-    name: Contact our support
-    email: contact@example.com
-    url: http://example.com/contact
+    name: Platform Support
+    email: contact@magicians.vr4deaf.org
+    url: https://magicians.vr4deaf.org/contact
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   x-logo:
-    url: 'https://redocly.github.io/openapi-template/logo.png'
-    altText: OpenAPI example logo
+    url: 'https://magicians.vr4deaf.org/logo.png'
+    altText: Magicians VR4Deaf Platform logo
   description: >
-    This is an **example** API to demonstrate features of the OpenAPI
-    specification.
+    This is the **Magicians VR4Deaf Platform** internal API.
 
     # Introduction
 
-    This API definition is intended to to be a good starting point for
-    describing your API in [OpenAPI/Swagger
-    format](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.2.md).
+    The Magicians VR4Deaf Platform exposes REST endpoints for internal services,
+    vendor integrations, network management, registry access, ingress routing,
+    rate limiting, business rules, NPX task execution, service-to-service
+    communication, and database operations.
 
-    It also demonstrates features of the
-    [create-openapi-repo](https://github.com/Redocly/create-openapi-repo) tool
-    and the [Redoc](https://github.com/Redocly/Redoc) documentation engine. Beyond
-    the standard OpenAPI syntax, we use a few 
-    [vendor extensions](https://github.com/Redocly/Redoc/blob/main/docs/redoc-vendor-extensions.md).
+    All endpoints are **internal only** unless explicitly marked public.
 
-    # OpenAPI Specification
+    # Authentication
 
-    The goal of The OpenAPI Specification is to define a standard, language-agnostic interface to REST APIs which
-    allows both humans and computers to discover and understand the capabilities
-    of the service without access to source
-    code, documentation, or through network traffic inspection. When properly
-    defined via OpenAPI, a consumer can 
-    understand and interact with the remote service with a minimal amount of
-    implementation logic. Similar to what
-    interfaces have done for lower-level programming, OpenAPI removes the
-    guesswork in calling the service.
+    Services authenticate using short-lived JWT bearer tokens issued by the
+    platform OAuth2 server at
+    `https://magicians.vr4deaf.org/api/oauth/dialog`. Service accounts use the
+    `service_account` grant type. Human administrators use the implicit flow.
+
+    # Rate Limiting
+
+    Every endpoint enforces rate limits. Limits are returned in the
+    `X-Rate-Limit-Limit`, `X-Rate-Limit-Remaining`, and `X-Rate-Limit-Reset`
+    response headers. When a limit is exceeded the API responds with
+    `429 Too Many Requests`.
+
+    # Service-to-Service Communication
+
+    Internal services call each other through the cluster ingress at
+    `https://internal.magicians.vr4deaf.org`. Requests must carry a valid
+    `X-Service-Token` header issued by the `/auth/service-token` endpoint.
 externalDocs:
-  description: "Find out how to create a GitHub repo for your OpenAPI definition."
-  url: 'https://github.com/Redocly/create-openapi-repo'
+  description: "Platform internal wiki and runbooks."
+  url: 'https://magicians.vr4deaf.org/docs'
 tags:
-  - name: Echo
-    description: "Example echo operations."
   - name: User
-    description: "Example actions on user accounts."
+    description: "User account management."
   - name: Admin
-    description: "Example operations reserved for administrators."
+    description: "Operations reserved for administrators."
   - name: Info
-    description: "Example operations for retrieving information."
-  - name: Tag
-    description: "This is a tag description."
+    description: "Platform information and health."
+  - name: Network
+    description: "Internal network topology and status."
+  - name: Registry
+    description: "Internal-only package/image registry. Requires registry scope."
+  - name: Vendors
+    description: "Third-party vendor integrations."
+  - name: Rate
+    description: "Rate limiting configuration and current state."
+  - name: Rules
+    description: "Business rules engine — create, read, update, and evaluate rules."
+  - name: NPX
+    description: "NPX task execution — run Node packages as ephemeral service jobs."
+  - name: Ingress
+    description: "Ingress routing table — manage virtual hosts and path rewrites."
+  - name: Database
+    description: "Database proxy layer — schema introspection and query management."
 x-tagGroups:
-  - name: General
+  - name: Users
     tags:
       - User
-      - Info
-      - Echo
-  - name: Administration
-    tags:
       - Admin
+  - name: Platform
+    tags:
+      - Info
+      - Network
+      - Ingress
+  - name: Data & Rules
+    tags:
+      - Database
+      - Rules
+      - Rate
+  - name: Integrations
+    tags:
+      - Vendors
+      - Registry
+      - NPX
 servers:
-  - url: https://{tenant}/api/v1
-    variables:
-      tenant:
-        default: www
-        description: Your tenant id
-  - url: https://example.com/api/v1
+  - url: https://magicians.vr4deaf.org/api/v1
+    description: Public API gateway
+  - url: https://internal.magicians.vr4deaf.org/api/v1
+    description: Internal service-to-service endpoint (cluster network only)
 paths:
   '/users/{username}':
     $ref: 'paths/users_{username}.yaml'
@@ -77,36 +102,74 @@ paths:
     $ref: 'paths/user.yaml'
   '/user/list':
     $ref: 'paths/user-status.yaml'
-  /pathItem:
-    $ref: paths/pathItem.yaml
-  /pathItemWithExamples:
-    $ref: paths/pathItemWithExamples.yaml
-  '/echo':
-    $ref: 'paths/echo.yaml'
+  '/network':
+    $ref: 'paths/network.yaml'
+  '/network/status':
+    $ref: 'paths/network_status.yaml'
+  '/registry':
+    $ref: 'paths/registry.yaml'
+  '/registry/{package}':
+    $ref: 'paths/registry_{package}.yaml'
+  '/vendors':
+    $ref: 'paths/vendors.yaml'
+  '/vendors/{vendorId}':
+    $ref: 'paths/vendors_{vendorId}.yaml'
+  '/rate':
+    $ref: 'paths/rate.yaml'
+  '/rate/{resource}':
+    $ref: 'paths/rate_{resource}.yaml'
+  '/rules':
+    $ref: 'paths/rules.yaml'
+  '/rules/{ruleId}':
+    $ref: 'paths/rules_{ruleId}.yaml'
+  '/rules/{ruleId}/evaluate':
+    $ref: 'paths/rules_{ruleId}_evaluate.yaml'
+  '/npx':
+    $ref: 'paths/npx.yaml'
+  '/npx/{jobId}':
+    $ref: 'paths/npx_{jobId}.yaml'
+  '/ingress':
+    $ref: 'paths/ingress.yaml'
+  '/ingress/{routeId}':
+    $ref: 'paths/ingress_{routeId}.yaml'
+  '/db':
+    $ref: 'paths/db.yaml'
+  '/db/{schema}':
+    $ref: 'paths/db_{schema}.yaml'
 components:
   securitySchemes:
     main_auth:
-      description: "Example description text of the OAuth2 scheme."
+      description: "OAuth2 implicit flow for human administrators."
       type: oauth2
       flows:
         implicit:
-          authorizationUrl: http://example.com/api/oauth/dialog
+          authorizationUrl: https://magicians.vr4deaf.org/api/oauth/dialog
           scopes:
             'read:users': read user info
             'write:users': modify or remove users
+            'read:registry': read internal registry
+            'write:registry': publish to internal registry
+            'manage:ingress': manage ingress routes
+            'manage:rules': manage business rules
+            'manage:rate': manage rate limit policies
+            'manage:db': database proxy access
+            'manage:vendors': vendor integration management
+            'run:npx': execute NPX jobs
+    service_token:
+      description: "Short-lived service token for service-to-service calls. Pass in the `X-Service-Token` header."
+      type: apiKey
+      in: header
+      name: X-Service-Token
     api_key:
-      description: "Example description text of the API key scheme."
+      description: "Long-lived API key for automated integrations."
       type: apiKey
       in: header
       name: api_key
-    basic_auth:
-      type: http
-      scheme: basic
 webhooks:
   userInfo:
     post:
       summary: New user webhook
-      description: "Information about a new user in the system."
+      description: "Fired when a new user is created in the platform."
       operationId: userInfo
       tags:
         - Info
@@ -117,6 +180,23 @@ webhooks:
               $ref: 'components/schemas/User.yaml'
       responses:
         '200':
-          description: "Successfully retrieved information about a new user."
+          description: "Successfully processed user creation event."
       security:
         - api_key: []
+  ruleTriggered:
+    post:
+      summary: Rule triggered webhook
+      description: "Fired when a business rule evaluation returns `true`."
+      operationId: ruleTriggered
+      tags:
+        - Rules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'components/schemas/RuleEvent.yaml'
+      responses:
+        '200':
+          description: "Event acknowledged."
+      security:
+        - service_token: []

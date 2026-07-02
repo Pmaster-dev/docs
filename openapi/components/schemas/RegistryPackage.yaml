@@ -1,0 +1,42 @@
+type: object
+required:
+  - name
+  - version
+  - type
+properties:
+  name:
+    type: string
+    description: "Package name (scoped or unscoped npm-style)."
+    example: "@magicians/auth-client"
+  version:
+    type: string
+    description: "Semantic version string."
+    example: "2.3.1"
+  type:
+    type: string
+    enum:
+      - npm
+      - docker
+      - helm
+    description: "Package type."
+  description:
+    type: string
+    description: "Short description of the package."
+  publishedAt:
+    type: string
+    format: date-time
+    description: "When this version was published."
+    example: "2024-01-10T14:30:00Z"
+  publishedBy:
+    type: string
+    description: "Service account or user that published the package."
+    example: "ci-service"
+  internal:
+    type: boolean
+    default: true
+    description: "Always `true` — packages in this registry are internal only."
+  tarballUrl:
+    type: string
+    format: uri
+    description: "URL to download the package tarball (requires `read:registry` scope)."
+    example: "https://internal.magicians.vr4deaf.org/registry/@magicians/auth-client/-/auth-client-2.3.1.tgz"

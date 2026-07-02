@@ -1,0 +1,54 @@
+get:
+  tags:
+    - Vendors
+  summary: List vendor integrations
+  description: "Returns all configured third-party vendor integrations."
+  operationId: listVendors
+  security:
+    - main_auth:
+        - 'manage:vendors'
+    - service_token: []
+  responses:
+    '200':
+      description: "List of vendor integrations."
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../components/schemas/Vendor.yaml'
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml
+post:
+  tags:
+    - Vendors
+  summary: Register a vendor integration
+  description: "Registers a new third-party vendor integration. Requires `manage:vendors` scope."
+  operationId: createVendor
+  security:
+    - main_auth:
+        - 'manage:vendors'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../components/schemas/Vendor.yaml'
+  responses:
+    '201':
+      description: "Vendor integration registered."
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/Vendor.yaml'
+    '400':
+      $ref: ../components/responses/Problem.yaml
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml
+    '409':
+      description: "A vendor with this ID already exists."
+      $ref: ../components/responses/Problem.yaml

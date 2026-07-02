@@ -1,0 +1,46 @@
+type: object
+required:
+  - schemaName
+  - engine
+properties:
+  schemaName:
+    type: string
+    description: "Database schema / namespace name."
+    example: "users_db"
+  engine:
+    type: string
+    enum:
+      - postgres
+      - mysql
+      - sqlite
+      - mongo
+    description: "Database engine."
+  host:
+    type: string
+    description: "Database host (internal cluster DNS). Read-only from API; set via platform config."
+    readOnly: true
+    example: "postgres.default.svc.cluster.local"
+  port:
+    type: integer
+    readOnly: true
+    example: 5432
+  tables:
+    type: array
+    readOnly: true
+    description: "Table names available in this schema (populated by introspection)."
+    items:
+      type: string
+    example:
+      - users
+      - sessions
+      - audit_log
+  readOnly:
+    type: boolean
+    default: false
+    description: "When true, only SELECT queries are permitted through the proxy."
+  connectionPoolSize:
+    type: integer
+    minimum: 1
+    maximum: 100
+    default: 10
+    description: "Connection pool size."

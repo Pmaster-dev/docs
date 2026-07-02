@@ -1,0 +1,76 @@
+parameters:
+  - name: vendorId
+    in: path
+    required: true
+    description: "Unique vendor identifier."
+    schema:
+      type: string
+    example: "vendor-stripe-001"
+get:
+  tags:
+    - Vendors
+  summary: Get a vendor integration
+  operationId: getVendor
+  security:
+    - main_auth:
+        - 'manage:vendors'
+    - service_token: []
+  responses:
+    '200':
+      description: "Vendor integration details."
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/Vendor.yaml'
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml
+    '404':
+      $ref: ../components/responses/Problem.yaml
+put:
+  tags:
+    - Vendors
+  summary: Update a vendor integration
+  operationId: updateVendor
+  security:
+    - main_auth:
+        - 'manage:vendors'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../components/schemas/Vendor.yaml'
+  responses:
+    '200':
+      description: "Vendor integration updated."
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/Vendor.yaml'
+    '400':
+      $ref: ../components/responses/Problem.yaml
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml
+    '404':
+      $ref: ../components/responses/Problem.yaml
+delete:
+  tags:
+    - Vendors
+  summary: Remove a vendor integration
+  operationId: deleteVendor
+  security:
+    - main_auth:
+        - 'manage:vendors'
+  responses:
+    '204':
+      description: "Vendor integration removed."
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml
+    '404':
+      $ref: ../components/responses/Problem.yaml

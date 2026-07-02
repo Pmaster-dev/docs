@@ -1,0 +1,27 @@
+get:
+  tags:
+    - Database
+  summary: List database schemas
+  description: |
+    Returns all database schemas accessible through the platform database proxy.
+
+    **Internal only** — requires `manage:db` scope. This endpoint is only
+    reachable via the internal service-to-service endpoint.
+  operationId: listDatabaseSchemas
+  security:
+    - service_token: []
+    - main_auth:
+        - 'manage:db'
+  responses:
+    '200':
+      description: "List of database schemas."
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../components/schemas/DatabaseSchema.yaml'
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml

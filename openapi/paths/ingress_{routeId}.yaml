@@ -1,0 +1,78 @@
+parameters:
+  - name: routeId
+    in: path
+    required: true
+    description: "Unique route identifier."
+    schema:
+      type: string
+    example: "route-auth-001"
+get:
+  tags:
+    - Ingress
+  summary: Get an ingress route
+  operationId: getIngressRoute
+  security:
+    - main_auth:
+        - 'manage:ingress'
+    - service_token: []
+  responses:
+    '200':
+      description: "Ingress route details."
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/IngressRoute.yaml'
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml
+    '404':
+      $ref: ../components/responses/Problem.yaml
+put:
+  tags:
+    - Ingress
+  summary: Update an ingress route
+  description: "Updates an existing route. Path rewrites and backend changes propagate to the ingress controller within ~30 seconds."
+  operationId: updateIngressRoute
+  security:
+    - main_auth:
+        - 'manage:ingress'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../components/schemas/IngressRoute.yaml'
+  responses:
+    '200':
+      description: "Ingress route updated."
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/IngressRoute.yaml'
+    '400':
+      $ref: ../components/responses/Problem.yaml
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml
+    '404':
+      $ref: ../components/responses/Problem.yaml
+delete:
+  tags:
+    - Ingress
+  summary: Delete an ingress route
+  description: "Removes an ingress route. Traffic previously handled by this route will return 404 once propagation completes (~30 seconds)."
+  operationId: deleteIngressRoute
+  security:
+    - main_auth:
+        - 'manage:ingress'
+  responses:
+    '204':
+      description: "Ingress route deleted."
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml
+    '404':
+      $ref: ../components/responses/Problem.yaml

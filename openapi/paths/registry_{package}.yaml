@@ -1,0 +1,52 @@
+parameters:
+  - name: package
+    in: path
+    description: "URL-encoded package name, e.g. `%40magicians%2Fauth-client`."
+    required: true
+    schema:
+      type: string
+    example: "%40magicians%2Fauth-client"
+get:
+  tags:
+    - Registry
+  summary: Get package details
+  description: "Returns metadata for the latest version of a package. Append `@<version>` to the name to retrieve a specific version."
+  operationId: getRegistryPackage
+  security:
+    - service_token: []
+    - main_auth:
+        - 'read:registry'
+  responses:
+    '200':
+      description: "Package metadata."
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/RegistryPackage.yaml'
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml
+    '404':
+      $ref: ../components/responses/Problem.yaml
+delete:
+  tags:
+    - Registry
+  summary: Unpublish a package version
+  description: |
+    Removes a specific package version from the registry.
+
+    Requires `write:registry` scope. Deletion is permanent and cannot be undone.
+  operationId: deleteRegistryPackage
+  security:
+    - main_auth:
+        - 'write:registry'
+  responses:
+    '204':
+      description: "Package version deleted."
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml
+    '404':
+      $ref: ../components/responses/Problem.yaml

@@ -1,0 +1,76 @@
+parameters:
+  - name: resource
+    in: path
+    required: true
+    description: "URL-encoded resource identifier the policy targets."
+    schema:
+      type: string
+    example: "%2Fapi%2Fv1%2Fusers"
+get:
+  tags:
+    - Rate
+  summary: Get a rate limit policy
+  operationId: getRatePolicy
+  security:
+    - main_auth:
+        - 'manage:rate'
+    - service_token: []
+  responses:
+    '200':
+      description: "Rate policy for the resource, including current window state."
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/RatePolicy.yaml'
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml
+    '404':
+      $ref: ../components/responses/Problem.yaml
+put:
+  tags:
+    - Rate
+  summary: Update a rate limit policy
+  operationId: updateRatePolicy
+  security:
+    - main_auth:
+        - 'manage:rate'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../components/schemas/RatePolicy.yaml'
+  responses:
+    '200':
+      description: "Rate policy updated."
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/RatePolicy.yaml'
+    '400':
+      $ref: ../components/responses/Problem.yaml
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml
+    '404':
+      $ref: ../components/responses/Problem.yaml
+delete:
+  tags:
+    - Rate
+  summary: Delete a rate limit policy
+  operationId: deleteRatePolicy
+  security:
+    - main_auth:
+        - 'manage:rate'
+  responses:
+    '204':
+      description: "Rate policy deleted."
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml
+    '404':
+      $ref: ../components/responses/Problem.yaml

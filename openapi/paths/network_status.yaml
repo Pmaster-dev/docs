@@ -1,0 +1,50 @@
+get:
+  tags:
+    - Network
+  summary: Get overall network status
+  description: "Returns aggregated health of the internal network — node counts by status, latency p50/p99, and any active incidents."
+  operationId: getNetworkStatus
+  security:
+    - service_token: []
+    - main_auth:
+        - 'read:users'
+  responses:
+    '200':
+      description: "Network status summary."
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              healthy:
+                type: integer
+                description: "Number of healthy nodes."
+                example: 12
+              degraded:
+                type: integer
+                description: "Number of degraded nodes."
+                example: 1
+              unreachable:
+                type: integer
+                description: "Number of unreachable nodes."
+                example: 0
+              latencyP50Ms:
+                type: number
+                description: "p50 inter-node latency in milliseconds."
+                example: 2.4
+              latencyP99Ms:
+                type: number
+                description: "p99 inter-node latency in milliseconds."
+                example: 18.7
+              activeIncidents:
+                type: integer
+                description: "Number of active network incidents."
+                example: 0
+              checkedAt:
+                type: string
+                format: date-time
+                example: "2024-01-15T09:00:00Z"
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml

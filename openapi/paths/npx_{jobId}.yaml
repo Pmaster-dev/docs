@@ -1,0 +1,55 @@
+parameters:
+  - name: jobId
+    in: path
+    required: true
+    description: "NPX job UUID."
+    schema:
+      type: string
+      format: uuid
+    example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+get:
+  tags:
+    - NPX
+  summary: Get NPX job status
+  description: "Returns the current status and, once completed, logs and exit code for an NPX job."
+  operationId: getNpxJob
+  security:
+    - service_token: []
+    - main_auth:
+        - 'run:npx'
+  responses:
+    '200':
+      description: "NPX job details."
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/NpxJob.yaml'
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml
+    '404':
+      $ref: ../components/responses/Problem.yaml
+delete:
+  tags:
+    - NPX
+  summary: Cancel an NPX job
+  description: "Attempts to cancel a `pending` or `running` job. Has no effect on completed jobs."
+  operationId: cancelNpxJob
+  security:
+    - service_token: []
+    - main_auth:
+        - 'run:npx'
+  responses:
+    '200':
+      description: "Cancellation requested."
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/NpxJob.yaml'
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml
+    '404':
+      $ref: ../components/responses/Problem.yaml

@@ -63,7 +63,7 @@ properties:
     description: "Unique ID of the user."
     externalDocs:
       description: Example of external documentation link
-      url: 'https://example.com'
+      url: 'https://magicians.vr4deaf.org/docs/user-id'
     allOf:
       - $ref: './UserID.yaml'
 xml:

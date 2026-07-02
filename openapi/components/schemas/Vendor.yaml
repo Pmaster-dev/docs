@@ -1,0 +1,43 @@
+type: object
+required:
+  - vendorId
+  - name
+  - status
+properties:
+  vendorId:
+    type: string
+    description: "Unique vendor identifier."
+    example: "vendor-stripe-001"
+  name:
+    type: string
+    description: "Human-readable vendor name."
+    example: "Stripe"
+  status:
+    type: string
+    enum:
+      - active
+      - suspended
+      - pending
+    description: "Integration status."
+  baseUrl:
+    type: string
+    format: uri
+    description: "The vendor's API base URL as configured."
+    example: "https://api.stripe.com/v1"
+  scopes:
+    type: array
+    items:
+      type: string
+    description: "Platform scopes granted to this vendor."
+    example:
+      - "read:users"
+  webhookUrl:
+    type: string
+    format: uri
+    description: "Endpoint where the platform pushes events to this vendor."
+    example: "https://vendor-endpoint.example.com/webhooks/magicians"
+  createdAt:
+    type: string
+    format: date-time
+    description: "When this vendor integration was created."
+    example: "2024-01-01T00:00:00Z"

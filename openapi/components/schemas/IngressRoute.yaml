@@ -1,0 +1,48 @@
+type: object
+required:
+  - routeId
+  - host
+  - path
+  - backend
+properties:
+  routeId:
+    type: string
+    description: "Unique route identifier."
+    example: "route-auth-001"
+  host:
+    type: string
+    description: "Virtual host to match (supports wildcard prefix, e.g. `*.magicians.vr4deaf.org`)."
+    example: "api.magicians.vr4deaf.org"
+  path:
+    type: string
+    description: "URL path prefix to match."
+    example: "/api/v1/users"
+  backend:
+    type: string
+    description: "Upstream service URL or cluster-internal service name."
+    example: "http://user-service.default.svc.cluster.local:3000"
+  rewritePath:
+    type: string
+    description: "If set, the matched path prefix is rewritten to this value before forwarding."
+    example: "/v1/users"
+  stripPrefix:
+    type: boolean
+    default: false
+    description: "Strip the matched path prefix before forwarding (ignored when `rewritePath` is set)."
+  priority:
+    type: integer
+    default: 100
+    description: "Lower number = higher match priority."
+  tls:
+    type: boolean
+    default: true
+    description: "Whether to enforce TLS for this route."
+  enabled:
+    type: boolean
+    default: true
+    description: "Whether this route is active."
+  annotations:
+    type: object
+    additionalProperties:
+      type: string
+    description: "Key-value annotations forwarded to the underlying ingress controller."
