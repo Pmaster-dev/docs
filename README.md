@@ -15,6 +15,9 @@ See the [`docs/`](./docs/README.md) directory for full project documentation:
 - [Environments & Bootstrap](./docs/environments.md)
 - [AI Providers, Vendors & Resources](./docs/providers.md)
 - [Package Managers & Runtimes](./docs/package-managers.md)
+- [Triggers, Webhooks & Prompts](./docs/triggers-webhooks.md)
+- [Pipeline Handoffs](./docs/pipeline-handoffs.md)
+- [Copilot, Bots & Auth Access](./docs/copilot-bots.md)
 
 ### Project Docs
 - [DeafAuth](./docs/projects/deafauth.md)
