@@ -1,8 +1,8 @@
 # DeafAuth
 
-Source: [`360magicians/deafauth`](https://github.com/360magicians/deafauth) · [`360magicians/infrastructure`](https://github.com/360magicians/infrastructure)
+Sources: [`360magicians/deafauth`](https://github.com/360magicians/deafauth) · [`MBTQ-dev/DeafAUTH`](https://github.com/MBTQ-dev/DeafAUTH) · [`DeafAUTH/readme.md`](https://github.com/DeafAUTH/readme.md)
 
-> Vertical Agent — Web2/Web3 authentication & verification for Deaf-first platforms.
+> Universal identity compiler — Web2/Web3 authentication & verification for Deaf-first platforms.
 
 ---
 
@@ -119,3 +119,99 @@ Key source files:
 - `src_components_Auth_Version2.js` — Auth UI components
 - `src_hooks_useAccommodations_Version2.js` — Accessibility hooks
 - `functions_index_Version2.js` — Cloud Functions entry point
+
+---
+
+## DeafAUTH SDK (MBTQ-dev/DeafAUTH)
+
+The [MBTQ-dev/DeafAUTH](https://github.com/MBTQ-dev/DeafAUTH) repository is the **universal identity compiler** — a framework-agnostic protocol that aggregates authentication from multiple sources into a single Deaf-first identity hub.
+
+> **Not a framework. Not a library. A protocol.**
+
+### Core Concept
+
+```
+┌─────────────────────────────────────────┐
+│  Your Existing Auth Systems             │
+│  (Auth0, Google, Work SSO, School, IoT) │
+└──────────────┬──────────────────────────┘
+               │
+               ▼
+         ┌────────────┐
+         │  DeafAUTH  │  ← Compiles ALL into ONE
+         │  Compiler  │     with Deaf-first defaults
+         └──────┬─────┘
+                │
+                ▼
+    ┌───────────────────────┐
+    │  One Identity         │
+    │  Infinite Access      │
+    │  Accessibility Synced │
+    └───────────────────────┘
+```
+
+### Quick Start
+
+```typescript
+import { DeafAUTH } from '@deafauth/core';
+
+const deafauth = new DeafAUTH({ apiUrl: 'https://api.deafauth.mbtq.dev' });
+
+const user = await deafauth.register({
+  email: 'user@example.com',
+  password: 'secure-password',
+  name: 'John Doe'
+  // Automatically includes: deaf_status, preferred_language: 'ASL',
+  // communication_preference: 'visual', accessibility_needs: []
+});
+```
+
+### API Endpoints
+
+```
+POST   /v1/register          # Create DeafAUTH identity
+POST   /v1/login             # Authenticate user
+POST   /v1/validate-deaf     # Validate Deaf identity
+POST   /v1/connect-system    # Link external auth system
+GET    /v1/user/:id          # Get user profile
+PATCH  /v1/user/:id          # Update preferences
+DELETE /v1/user/:id          # Delete identity
+```
+
+### SDKs
+
+| Language | Package | Install |
+|----------|---------|---------|
+| JavaScript/TypeScript | `@deafauth/core` | `npm install @deafauth/core` |
+| Python | `deafauth` | `pip install deafauth` |
+| Go | `github.com/deafauth/go-sdk` | `go get github.com/deafauth/go-sdk` |
+| PHP | `deafauth/php-sdk` | `composer require deafauth/php-sdk` |
+| Ruby | `deafauth` | `gem install deafauth` |
+| Rust | `deafauth` | `cargo add deafauth` |
+
+### Integration Patterns
+
+**OAuth Wrapper** — Wrap existing OAuth with DeafAUTH to add Deaf preferences:
+```
+User → Your App → DeafAUTH → Auth0/Google
+                     ↓
+              Deaf preferences stored & synced
+```
+
+**Identity Hub** — Central hub for all authentications:
+```
+Work SSO ─┐
+School   ─┼→ DeafAUTH → Your App (Single identity + Accessibility)
+IoT      ─┘
+```
+
+**Microservices** — Each service checks DeafAUTH:
+```
+Service A ─┐
+Service B ─┼→ DeafAUTH API (validates token + returns preferences)
+Service C ─┘
+```
+
+- **API Docs:** [api.deafauth.mbtq.dev/docs](https://api.deafauth.mbtq.dev/docs)
+- **Website:** [deafauth.mbtq.dev](https://deafauth.mbtq.dev)
+

@@ -14,6 +14,8 @@ See the [`docs/`](./docs/README.md) directory for full project documentation:
 - [FibonRose](./docs/projects/fibonrose.md)
 - [Municipal DAO](./docs/projects/municipal-dao.md)
 - [Railway Next.js Template](./docs/projects/railway-template.md)
+- [MBTQ.dev](./docs/projects/mbtq-dev.md)
+- [MBTQUniverse](./docs/projects/mbtquniverse.md)
 
 ## OpenAPI Definition
 
