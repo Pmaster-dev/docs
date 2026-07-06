@@ -45,7 +45,7 @@ Generate a PinkSync accessibility event POST call for a page_load event with com
 
 @workspace Does this change break any Magician agent job contracts (inputs/outputs)?
 
-@workspace Check if this PR respects the pnpm-only rule for 360magicians org projects.
+@workspace Check if this PR respects the pnpm-only rule for 360 Magicians org projects.
 ```
 
 ### Debugging

@@ -9,14 +9,14 @@
 | Project | Runtime | Package Manager | Server Pattern | Framework |
 |---------|---------|----------------|----------------|-----------|
 | **FibonRose** | Node.js 20 | `pnpm` | Next.js App Router | Next.js 15 |
-| **PinkSync (360magicians)** | Node.js 20 | `pnpm` | Next.js App Router | Next.js 15 |
+| **PinkSync (360 Magicians)** | Node.js 20 | `pnpm` | Next.js App Router | Next.js 15 |
 | **PinkSync microservices** | Deno 1.x | native (import maps) | Deno HTTP | Fresh |
 | **Railway Template** | Node.js 20 | `npm` | Next.js App Router + `/api/health` | Next.js 15 |
 | **Municipal DAO** | Node.js 20 | `npm` | WebSocket + Next.js | Next.js 15 |
 | **mbtq-dev client** | Node.js 20 | `npm` | Vite SPA | React 18 + Vite |
 | **mbtq-dev server** | Node.js 20 | `npm` | Express REST API | TypeScript + Prisma |
 | **MBTQUniverse** | Node.js 20 | `npm` | Express API gateway | Vanilla JS / ESM |
-| **DeafAuth (360magicians)** | Node.js 20 | `pnpm` | Next.js App Router | Next.js 15 + Firebase |
+| **DeafAuth (360 Magicians)** | Node.js 20 | `pnpm` | Next.js App Router | Next.js 15 + Firebase |
 | **DeafAUTH SDK (MBTQ-dev)** | Node.js 20 | `npm` | Framework-agnostic library | TypeScript |
 | **Auto-API (MBTQ-dev)** | Python 3.11 | `pip` | FastAPI | FastAPI |
 | **pinksync-starter (MBTQ-dev)** | Python 3.11 | `pip` | FastAPI / Flask | Python |
@@ -25,9 +25,9 @@
 
 ## pnpm Projects
 
-**Used by:** FibonRose, PinkSync (360magicians org), DeafAuth (360magicians org)
+**Used by:** FibonRose, PinkSync (360 Magicians org), DeafAuth (360 Magicians org)
 
-pnpm is preferred for Next.js/TypeScript projects in the 360magicians org because it:
+pnpm is preferred for Next.js/TypeScript projects in the 360 Magicians org because it:
 - Uses hard links for a shared content-addressable store (faster installs, less disk)
 - Enforces strict dependency hoisting (avoids phantom dependencies)
 - Has first-class monorepo support via workspaces
@@ -299,7 +299,7 @@ See [AI Model Manifest](./ai-model-manifest.md) for per-model SDK assignments, a
 
 To keep the ecosystem consistent:
 
-1. **360magicians org** projects → use `pnpm`
+1. **360 Magicians org** projects → use `pnpm`
 2. **pinkycollie / MBTQ-dev** projects → use `npm`
 3. **PinkSync microservices** → use Deno (no node_modules)
 4. **All `.env` files** → must be gitignored; use `.env.example` as template

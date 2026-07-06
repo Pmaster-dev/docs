@@ -53,7 +53,7 @@ oRPC Inference Gateway  (api.360magicians.com/inference/*)
 
 | Service | Default LLM | Override Env Var |
 |---------|------------|-----------------|
-| 360magicians hub | `gemini-1.5-pro` | `HUB_LLM_MODEL` |
+| 360 Magicians hub | `gemini-1.5-pro` | `HUB_LLM_MODEL` |
 | mbtq.dev | `gemini-1.5-flash` | `MBTQ_LLM_MODEL` |
 | PinkSync | `mistral-7b-instruct` | `PINKSYNC_LLM_MODEL` |
 | DeafAuth | `gemini-1.5-flash` | `DEAFAUTH_LLM_MODEL` |

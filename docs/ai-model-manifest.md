@@ -9,14 +9,14 @@
 | HuggingFace ID / Model Slug | Type | Source | License | Assigned Platform(s) |
 |-----------------------------|------|--------|---------|----------------------|
 | `meta-llama/Meta-Llama-3-8B-Instruct` | LLM | HF Hub / Groq / Ollama | Llama 3 Community | mbtq.dev, Quinn AI |
-| `meta-llama/Meta-Llama-3-70B-Instruct` | LLM | Groq API | Llama 3 Community | 360magicians hub, agents |
+| `meta-llama/Meta-Llama-3-70B-Instruct` | LLM | Groq API | Llama 3 Community | 360 Magicians hub, agents |
 | `mistralai/Mistral-7B-Instruct-v0.3` | LLM | HF Hub / vLLM / Ollama | Apache 2.0 | PinkSync microservices, fallback |
 | `mistralai/Mixtral-8x7B-Instruct-v0.1` | LLM | Groq API | Apache 2.0 | Fast inference layer |
 | `openai/gpt-4o` | LLM | OpenAI API | Proprietary | Quinn AI, GROW stage |
 | `openai/gpt-4` | LLM | OpenAI API | Proprietary | Railway template, mbtq-dev |
 | `anthropic/claude-3-5-sonnet` | LLM | Anthropic API | Proprietary | BUILD stage, agent review |
 | `anthropic/claude-3-haiku` | LLM | Anthropic API | Proprietary | Fast agent tasks |
-| `google/gemini-1.5-pro` | LLM | Vertex AI / AI Studio | Proprietary | 360magicians hub, mbtq.dev |
+| `google/gemini-1.5-pro` | LLM | Vertex AI / AI Studio | Proprietary | 360 Magicians hub, mbtq.dev |
 | `google/gemini-1.5-flash` | LLM | Vertex AI / AI Studio | Proprietary | Gemini CLI bridge, real-time |
 | `openai/gpt-4o` (vision) | VLM | OpenAI API | Proprietary | Content generation, media |
 | `google/gemini-1.5-pro` (vision) | VLM | Vertex AI | Proprietary | Accessibility AI, sign-lang |
@@ -254,7 +254,7 @@ FAL_KEY=...
 | Scope | Isolated | Shared Pool | Notes |
 |-------|:--------:|:-----------:|-------|
 | DeafAuth identity models (BGE, Whisper) | ✓ | — | Dedicated namespace; no cross-service access |
-| 360magicians hub (Gemini, Llama 70B) | — | ✓ | Shared inference pool via oRPC gateway |
+| 360 Magicians hub (Gemini, Llama 70B) | — | ✓ | Shared inference pool via oRPC gateway |
 | PinkSync accessibility transforms (CLIP, Whisper) | ✓ | — | PII: sign-language frames stay in PinkSync namespace |
 | Quinn AI assistant (Claude, GPT-4o) | ✓ | — | Agent context isolated per session |
 | MBTQUniverse DAO (GPT-4o, Gemini) | — | ✓ | Shared via inference gateway |

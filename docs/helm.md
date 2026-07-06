@@ -35,7 +35,7 @@ helm/
 
 ## Services & Chart Values
 
-### 360magicians (Vertex AI Hub)
+### 360 Magicians (Vertex AI Hub)
 
 ```yaml
 # Default values
