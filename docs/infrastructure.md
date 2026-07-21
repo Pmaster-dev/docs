@@ -102,8 +102,8 @@ User profile example:
 
 ## References
 
-- [DeafAUTH Docs](https://deafauth.mbtq.dev/docs)
-- [360Magicians API](https://api.360magicians.com/docs)
-- [LifecycleBlueprint JSON Schema](https://docs.mbtq.dev/lifecycleblueprint)
+- [DeafAUTH Docs](https://github.com/deafauth/docs)
+- [360Magicians API](https://github.com/pmaster-dev/docs)
+- [LifecycleBlueprint JSON Schema](https://github.com/mbtq&dev/docs/lifecycleblueprint)
 - [AI Model Manifest](./ai-model-manifest.md)
 - [AI Inference Architecture](./ai-inference.md)
