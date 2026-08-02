@@ -1,0 +1,13 @@
+type: object
+description: Request body for running a marketing campaign.
+required:
+  - campaign_brief
+properties:
+  campaign_brief:
+    type: string
+    description: Markdown-formatted campaign brief.
+    example: "# Q1 Campaign\nTarget: Deaf entrepreneurs...\n"
+  budget:
+    type: number
+    description: Optional budget in USD.
+    example: 5000

@@ -1,7 +1,33 @@
 # Magicians VR4Deaf Platform — API Documentation
 
-OpenAPI 3.1 specification for the **Magicians VR4Deaf Platform** internal and
-public API, rendered with [Redocly](https://redocly.com/).
+OpenAPI definition and aggregated documentation for the **Magicians VR4Deaf Platform** internal and public API, rendered with [Redocly](https://redocly.com/).
+
+## Project Docs
+
+See the [`docs/`](./docs/README.md) directory for full project documentation:
+
+### Ecosystem Guides
+- [About 360Magicians](./docs/about.md)
+- [Infrastructure / Ecosystem Architecture](./docs/infrastructure.md)
+- [Git Workflow & GitHub Integration](./docs/git-workflow.md)
+- [Helm Deployment (dev → prod)](./docs/helm.md)
+- [Environments & Bootstrap](./docs/environments.md)
+- [AI Providers, Vendors & Resources](./docs/providers.md)
+- [AI Model Manifest](./docs/ai-model-manifest.md)
+- [AI Inference Architecture](./docs/ai-inference.md)
+- [Package Managers & Runtimes](./docs/package-managers.md)
+- [Triggers, Webhooks & Prompts](./docs/triggers-webhooks.md)
+- [Pipeline Handoffs](./docs/pipeline-handoffs.md)
+- [Copilot, Bots & Auth Access](./docs/copilot-bots.md)
+
+### Project Docs
+- [DeafAuth](./docs/projects/deafauth.md)
+- [PinkSync](./docs/projects/pinksync.md)
+- [FibonRose](./docs/projects/fibonrose.md)
+- [Municipal DAO](./docs/projects/municipal-dao.md)
+- [Railway Next.js Template](./docs/projects/railway-template.md)
+- [MBTQ.dev](./docs/projects/mbtq-dev.md)
+- [MBTQUniverse](./docs/projects/mbtquniverse.md)
 
 ## Base URLs
 
@@ -10,21 +36,9 @@ public API, rendered with [Redocly](https://redocly.com/).
 | Public API gateway | `https://magicians.vr4deaf.org/api/v1` |
 | Internal (service-to-service, cluster only) | `https://internal.magicians.vr4deaf.org/api/v1` |
 
-## API Sections
+## OpenAPI Definition
 
-| Tag | Description |
-|-----|-------------|
-| **User** | User account management |
-| **Admin** | Administrator-only operations |
-| **Info** | Platform information and health |
-| **Network** | Internal network topology and node status |
-| **Registry** | Internal-only npm/Docker/Helm package registry |
-| **Vendors** | Third-party vendor integrations |
-| **Rate** | Rate limit policy management |
-| **Rules** | Business rules engine (JSON Logic DSL) |
-| **NPX** | Ephemeral Node package execution jobs |
-| **Ingress** | Ingress routing table and path rewrites |
-| **Database** | Database proxy layer — schema introspection |
+The `openapi/` directory contains the OpenAPI 3.1 definition for the **Magicians VR4Deaf Platform** API.
 
 ## Authentication
 
@@ -62,44 +76,3 @@ npm test
 ```
 
 Runs `redocly lint` against all API definitions.
-
-## Contributing
-
-### File layout
-
-```
-openapi/
-├── openapi.yaml              # Root spec (info, servers, paths index, webhooks)
-├── paths/                    # One YAML file per route
-│   ├── network.yaml
-│   ├── registry.yaml
-│   ├── vendors.yaml
-│   ├── rate.yaml
-│   ├── rules.yaml
-│   ├── npx.yaml
-│   ├── ingress.yaml
-│   ├── db.yaml
-│   └── ...
-└── components/
-    ├── schemas/              # Reusable schema objects
-    ├── headers/              # Reusable response headers
-    └── responses/            # Reusable response objects
-```
-
-### Adding a new path
-
-1. Create `openapi/paths/<your-path>.yaml` (replace `/` with `_`).
-2. Add a `$ref` entry in `openapi/openapi.yaml` under `paths:`.
-3. Run `npm test` to validate.
-
-### Adding a new schema
-
-1. Create `openapi/components/schemas/<SchemaName>.yaml`.
-2. Reference it in your path file with `$ref: '../components/schemas/<SchemaName>.yaml'`.
-
-### Redocly configuration
-
-`redocly.yaml` controls linting rules and code-sample generation.
-See the [Redocly CLI docs](https://redocly.com/docs/cli/configuration/) for
-all available options.
-

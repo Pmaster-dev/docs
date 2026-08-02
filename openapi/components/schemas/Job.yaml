@@ -1,0 +1,40 @@
+type: object
+description: A 360 Magicians lifecycle job.
+required:
+  - job_id
+  - stage
+  - assigned_to
+  - status
+properties:
+  job_id:
+    type: string
+    description: Unique job identifier.
+    example: build-003
+  stage:
+    type: string
+    enum: [IDEA, BUILD, GROW, MANAGED]
+    description: Lifecycle stage this job belongs to.
+    example: BUILD
+  assigned_to:
+    type: string
+    description: Magician agent assigned to this job.
+    example: DeveloperMagician
+  status:
+    type: string
+    enum: [pending, running, completed, failed]
+    description: Current job status.
+    example: completed
+  depends_on:
+    type: array
+    description: Job IDs that must complete before this job can start.
+    items:
+      type: string
+    example: ["build-002"]
+  inputs:
+    type: object
+    description: Input parameters for the job.
+    additionalProperties: true
+  outputs:
+    type: object
+    description: Output artifacts produced by the job.
+    additionalProperties: true

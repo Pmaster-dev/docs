@@ -1,0 +1,13 @@
+type: object
+description: Request body for market research.
+required:
+  - topic
+properties:
+  topic:
+    type: string
+    description: Research topic.
+    example: "Deaf-first SaaS governance market"
+  target_audience:
+    type: string
+    description: Target audience to research.
+    example: "Deaf entrepreneurs in North America"

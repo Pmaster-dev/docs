@@ -1,0 +1,13 @@
+type: object
+description: Request body for generating an idea.
+required:
+  - prompt
+properties:
+  prompt:
+    type: string
+    description: Description of the desired idea.
+    example: "Deaf-first SaaS idea for municipal governance"
+  target_audience:
+    type: string
+    description: Optional target audience hint.
+    example: "Deaf entrepreneurs"
