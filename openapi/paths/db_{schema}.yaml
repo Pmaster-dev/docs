@@ -1,0 +1,61 @@
+parameters:
+  - name: schema
+    in: path
+    required: true
+    description: "Database schema / namespace name."
+    schema:
+      type: string
+    example: "users_db"
+get:
+  tags:
+    - Database
+  summary: Get database schema details
+  description: "Returns metadata for a single database schema, including the table list populated by live introspection."
+  operationId: getDatabaseSchema
+  security:
+    - service_token: []
+    - main_auth:
+        - 'manage:db'
+  responses:
+    '200':
+      description: "Database schema details."
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/DatabaseSchema.yaml'
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml
+    '404':
+      $ref: ../components/responses/Problem.yaml
+put:
+  tags:
+    - Database
+  summary: Update database schema configuration
+  description: "Updates proxy-level configuration for a schema (pool size, read-only flag). Does **not** modify the underlying database DDL."
+  operationId: updateDatabaseSchema
+  security:
+    - main_auth:
+        - 'manage:db'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../components/schemas/DatabaseSchema.yaml'
+  responses:
+    '200':
+      description: "Schema configuration updated."
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/DatabaseSchema.yaml'
+    '400':
+      $ref: ../components/responses/Problem.yaml
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml
+    '404':
+      $ref: ../components/responses/Problem.yaml

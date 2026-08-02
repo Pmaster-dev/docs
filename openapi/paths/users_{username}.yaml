@@ -48,7 +48,7 @@ get:
             $ref: '../components/schemas/User.yaml'
           example:
             username: 'user1'
-            email: 'user@example.com'
+            email: 'user@magicians.vr4deaf.org'
     '403':
       description: Forbidden
       $ref: ../components/responses/Problem.yaml

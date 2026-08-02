@@ -1,0 +1,38 @@
+type: object
+required:
+  - nodeId
+  - host
+  - status
+properties:
+  nodeId:
+    type: string
+    description: "Unique identifier for the network node."
+    example: "node-us-east-1a"
+  host:
+    type: string
+    description: "Hostname or IP of the node."
+    example: "10.0.1.5"
+  status:
+    type: string
+    enum:
+      - healthy
+      - degraded
+      - unreachable
+    description: "Current health status of the node."
+  zone:
+    type: string
+    description: "Availability zone the node resides in."
+    example: "us-east-1a"
+  services:
+    type: array
+    description: "Services running on this node."
+    items:
+      type: string
+    example:
+      - auth-service
+      - registry-service
+  lastSeen:
+    type: string
+    format: date-time
+    description: "Last heartbeat timestamp."
+    example: "2024-01-15T09:00:00Z"

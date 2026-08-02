@@ -1,0 +1,26 @@
+type: object
+required:
+  - ruleId
+  - result
+  - triggeredAt
+properties:
+  ruleId:
+    type: string
+    description: "The ID of the rule that was evaluated."
+    example: "rule-auth-001"
+  result:
+    type: boolean
+    description: "Whether the rule evaluated to true."
+  context:
+    type: object
+    additionalProperties: true
+    description: "The context object passed to the rule engine at evaluation time."
+  triggeredAt:
+    type: string
+    format: date-time
+    description: "ISO 8601 timestamp of when the rule was triggered."
+    example: "2024-01-15T09:00:00Z"
+  serviceId:
+    type: string
+    description: "The originating service identifier."
+    example: "auth-service"

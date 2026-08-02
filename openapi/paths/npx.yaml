@@ -1,0 +1,97 @@
+get:
+  tags:
+    - NPX
+  summary: List NPX jobs
+  description: "Returns recent NPX job executions. Jobs older than 7 days are automatically purged."
+  operationId: listNpxJobs
+  security:
+    - service_token: []
+    - main_auth:
+        - 'run:npx'
+  parameters:
+    - name: status
+      in: query
+      description: "Filter by job status."
+      schema:
+        type: string
+        enum:
+          - pending
+          - running
+          - succeeded
+          - failed
+          - cancelled
+    - name: limit
+      in: query
+      description: "Maximum number of jobs to return."
+      schema:
+        type: integer
+        default: 50
+        maximum: 200
+  responses:
+    '200':
+      description: "List of NPX jobs."
+      headers:
+        X-Rate-Limit-Limit:
+          $ref: ../components/headers/Rate-Limit-Limit.yaml
+        X-Rate-Limit-Remaining:
+          $ref: ../components/headers/Rate-Limit-Remaining.yaml
+        X-Rate-Limit-Reset:
+          $ref: ../components/headers/Rate-Limit-Reset.yaml
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../components/schemas/NpxJob.yaml'
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml
+post:
+  tags:
+    - NPX
+  summary: Submit an NPX job
+  description: |
+    Submits a Node package for execution as an ephemeral job container.
+
+    The package is pulled from the internal registry (requires `read:registry`
+    on the service account) or from the public npm registry if not found
+    internally.
+
+    Jobs are queued and run asynchronously. Poll `GET /npx/{jobId}` for status,
+    or subscribe to the `npxJobCompleted` webhook.
+
+    **Service-to-service use**: internal services should include
+    `X-Service-Token` and set `requestedBy` to their service name.
+  operationId: submitNpxJob
+  security:
+    - service_token: []
+    - main_auth:
+        - 'run:npx'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../components/schemas/NpxJob.yaml'
+        example:
+          package: "@magicians/data-migrator"
+          version: "^1.2.0"
+          args:
+            - "--env"
+            - "production"
+          env:
+            LOG_LEVEL: "info"
+  responses:
+    '202':
+      description: "Job accepted and queued."
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/NpxJob.yaml'
+    '400':
+      $ref: ../components/responses/Problem.yaml
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml

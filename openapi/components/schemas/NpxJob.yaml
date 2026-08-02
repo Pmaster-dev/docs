@@ -1,0 +1,65 @@
+type: object
+required:
+  - package
+properties:
+  jobId:
+    type: string
+    description: "Unique job identifier (UUID v4)."
+    example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+  package:
+    type: string
+    description: "NPM package name (optionally scoped) to execute."
+    example: "@magicians/data-migrator"
+  version:
+    type: string
+    description: "Semver version constraint. Defaults to `latest`."
+    example: "^1.2.0"
+    default: "latest"
+  args:
+    type: array
+    description: "Command-line arguments passed to the package binary."
+    items:
+      type: string
+    example:
+      - "--env"
+      - "production"
+  env:
+    type: object
+    additionalProperties:
+      type: string
+    description: "Environment variables injected into the job container."
+  status:
+    type: string
+    enum:
+      - pending
+      - running
+      - succeeded
+      - failed
+      - cancelled
+    description: "Current job status."
+    readOnly: true
+  exitCode:
+    type: integer
+    description: "Process exit code (set when status is `succeeded` or `failed`)."
+    readOnly: true
+  logs:
+    type: string
+    description: "Captured stdout+stderr (available after completion)."
+    readOnly: true
+  startedAt:
+    type: string
+    format: date-time
+    readOnly: true
+    description: "When the job started running."
+    example: "2024-01-15T09:00:00Z"
+  completedAt:
+    type: string
+    format: date-time
+    readOnly: true
+    description: "When the job finished."
+    example: "2024-01-15T09:01:30Z"
+  requestedBy:
+    type: string
+    description: "Service or user that submitted the job."
+    example: "deploy-service"
+    readOnly: true

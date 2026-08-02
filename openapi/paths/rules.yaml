@@ -1,0 +1,57 @@
+get:
+  tags:
+    - Rules
+  summary: List business rules
+  description: "Returns all rules defined in the platform rules engine."
+  operationId: listRules
+  security:
+    - main_auth:
+        - 'manage:rules'
+    - service_token: []
+  parameters:
+    - name: enabled
+      in: query
+      description: "Filter by enabled state."
+      schema:
+        type: boolean
+  responses:
+    '200':
+      description: "List of rules."
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../components/schemas/Rule.yaml'
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml
+post:
+  tags:
+    - Rules
+  summary: Create a rule
+  description: "Adds a new rule to the rules engine. Requires `manage:rules` scope."
+  operationId: createRule
+  security:
+    - main_auth:
+        - 'manage:rules'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../components/schemas/Rule.yaml'
+  responses:
+    '201':
+      description: "Rule created."
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/Rule.yaml'
+    '400':
+      $ref: ../components/responses/Problem.yaml
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml

@@ -1,0 +1,60 @@
+parameters:
+  - name: ruleId
+    in: path
+    required: true
+    description: "Unique rule identifier."
+    schema:
+      type: string
+    example: "rule-auth-001"
+post:
+  tags:
+    - Rules
+  summary: Evaluate a rule
+  description: |
+    Evaluates a rule against a provided context object and returns whether it
+    triggered. Useful for testing rules before enabling them in production and
+    for ad-hoc service-to-service rule checks.
+  operationId: evaluateRule
+  security:
+    - service_token: []
+    - main_auth:
+        - 'manage:rules'
+  requestBody:
+    required: true
+    description: "Context object to pass to the rule expression."
+    content:
+      application/json:
+        schema:
+          type: object
+          additionalProperties: true
+          example:
+            user:
+              status: "banned"
+              id: "usr-123"
+  responses:
+    '200':
+      description: "Rule evaluation result."
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ruleId:
+                type: string
+                example: "rule-auth-001"
+              result:
+                type: boolean
+                description: "Whether the rule expression evaluated to true."
+              actions:
+                type: array
+                description: "Actions that would be taken (if rule result is true)."
+                items:
+                  type: object
+    '400':
+      $ref: ../components/responses/Problem.yaml
+    '401':
+      $ref: ../components/responses/Problem.yaml
+    '403':
+      $ref: ../components/responses/Problem.yaml
+    '404':
+      $ref: ../components/responses/Problem.yaml

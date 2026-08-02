@@ -1,0 +1,56 @@
+type: object
+required:
+  - ruleId
+  - name
+  - expression
+properties:
+  ruleId:
+    type: string
+    description: "Unique rule identifier."
+    example: "rule-auth-001"
+  name:
+    type: string
+    description: "Human-readable rule name."
+    example: "Block banned users"
+  description:
+    type: string
+    description: "What the rule does."
+  expression:
+    type: string
+    description: "Rule expression in the platform DSL (JSON Logic compatible)."
+    example: '{"in": [{"var": "user.status"}, ["banned"]]}'
+  enabled:
+    type: boolean
+    default: true
+    description: "Whether the rule is active."
+  priority:
+    type: integer
+    minimum: 0
+    description: "Lower number = higher priority when multiple rules match."
+    default: 100
+  actions:
+    type: array
+    description: "Actions to take when the rule evaluates to true."
+    items:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - block
+            - redirect
+            - notify
+            - tag
+        payload:
+          type: object
+          additionalProperties: true
+  createdAt:
+    type: string
+    format: date-time
+    readOnly: true
+    example: "2024-01-01T00:00:00Z"
+  updatedAt:
+    type: string
+    format: date-time
+    readOnly: true
+    example: "2024-01-15T12:00:00Z"
