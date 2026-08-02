@@ -1,3 +1,6 @@
+servers:
+  - url: https://internal.magicians.vr4deaf.org/api/v1
+    description: Internal service-to-service endpoint (cluster network only)
 get:
   tags:
     - Database

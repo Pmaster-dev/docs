@@ -50,5 +50,4 @@ post:
     '403':
       $ref: ../components/responses/Problem.yaml
     '409':
-      description: "A vendor with this ID already exists."
       $ref: ../components/responses/Problem.yaml

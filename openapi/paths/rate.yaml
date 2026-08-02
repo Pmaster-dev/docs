@@ -50,5 +50,4 @@ post:
     '403':
       $ref: ../components/responses/Problem.yaml
     '409':
-      description: "A policy for this resource already exists."
       $ref: ../components/responses/Problem.yaml

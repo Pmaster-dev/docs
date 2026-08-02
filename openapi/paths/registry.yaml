@@ -1,3 +1,6 @@
+servers:
+  - url: https://internal.magicians.vr4deaf.org/api/v1
+    description: Internal service-to-service endpoint (cluster network only)
 get:
   tags:
     - Registry
@@ -81,5 +84,4 @@ post:
     '403':
       $ref: ../components/responses/Problem.yaml
     '409':
-      description: "Package version already exists."
       $ref: ../components/responses/Problem.yaml

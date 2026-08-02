@@ -54,5 +54,4 @@ post:
     '403':
       $ref: ../components/responses/Problem.yaml
     '409':
-      description: "A route with this host+path already exists."
       $ref: ../components/responses/Problem.yaml

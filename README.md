@@ -53,7 +53,7 @@ integrations.
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) ≥ 18
+- [Node.js](https://nodejs.org/) ≥ 20.19.0 or ≥ 22.12.0
 
 ### Install
 

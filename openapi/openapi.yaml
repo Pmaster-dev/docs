@@ -147,6 +147,7 @@ components:
           scopes:
             'read:users': read user info
             'write:users': modify or remove users
+            'read:network': read internal network status
             'read:registry': read internal registry
             'write:registry': publish to internal registry
             'manage:ingress': manage ingress routes

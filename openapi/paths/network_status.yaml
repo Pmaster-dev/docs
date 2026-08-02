@@ -7,7 +7,7 @@ get:
   security:
     - service_token: []
     - main_auth:
-        - 'read:users'
+        - 'read:network'
   responses:
     '200':
       description: "Network status summary."
